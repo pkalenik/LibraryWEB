@@ -1,0 +1,45 @@
+﻿@model LibraryWEB.Models.Article
+
+@{
+    ViewBag.Title = "CreateArticle";
+}
+
+<h2>CreateArticle</h2>
+
+<div class="row justify-content-around">
+    <div class="feedback_form alert alert-info ff" style="margin: 0 auto; margin-top: 100px; width: 800px; margin-left: 300px;">
+        @using (Html.BeginForm("CreateArticle", "Home", FormMethod.Post))
+        {
+            @Html.LabelFor(model => model.Title, new { @class = "label label-info" })
+            @Html.TextBoxFor(model => model.Title, new
+            {
+                @class = "ml-auto mr-auto input_name form-control",
+                @placeholder = "Article Title",
+                @maxlength = "26",
+                @id = "name",
+                @title = "Please input correct title"
+            })
+            @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.Text, new { @class = "label label-info" })
+            @Html.TextAreaFor(model => model.Text, new
+            {
+                @class = "mr-auto ml-auto comment form-control",
+                @cols = 50,
+                @rows = 6,
+                @maxlength = 445,
+                @placeholder = "Article Text",
+            })
+            <p>Input Tags:</p>
+            @Html.TextBox("Tags", "", new { @class = "ml-auto mr-auto input_name form-control", @placeholder = "Tags", @required = "required" })
+            <input class="sub btn btn-success" type="submit" value="Submit Now" />
+        }
+    </div>
+    <div class="right_sidebar col-lg-4">
+        <ul class="nav">
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-controller="Guest" asp-action="Index">Guest</a></li>
+            <li><a asp-controller="Questionnaire" asp-action="Index">Questionnaire</a></li>
+        </ul>
+    </div>
+</div>
+

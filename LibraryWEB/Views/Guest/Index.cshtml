@@ -1,0 +1,80 @@
+﻿@using LibraryWEB.Helpers
+
+@{
+    ViewBag.Title = "Guest";
+}
+
+@model LibraryWEB.Models.IndexViewModel
+
+<main>
+    <div class="f alert alert-info">
+        <div class="feedbacks">
+            @foreach (var c in Model.Comments)
+            {
+                <div class="feedback alert alert-success">
+                    <p class="feedback_author">Author: <strong>@c.Name</strong></p>
+                    <p class="feedback_date">Date: @c.Date.ToShortDateString()</p>
+                    <p class="feedback_text">@c.CommentText.Text</p>
+                </div>
+            }
+        </div>
+        <div class="right_sidebar col-lg-3">
+            <ul class="nav">
+                <li><a asp-controller="Home">Home</a></li>
+                <li><a asp-controller="Guest">Guest</a></li>
+                <li><a asp-controller="Questionnaire">Questionnaire</a></li>
+            </ul>
+        </div>
+    </div>
+    @if (Model.PageViewModel.HasPreviousPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+           class="btn btn-outline-dark">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Back
+        </a>
+    }
+    @if (Model.PageViewModel.HasNextPage)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+           class="btn btn-outline-dark">
+            Forward
+            <i class="glyphicon glyphicon-chevron-right"></i>
+        </a>
+    }
+
+    <div class="feedback_form alert alert-info">
+        @using (Html.BeginForm("Index", "Guest", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+            <div>
+                @Html.ValidationMessageFor(model => model.Comment.Name, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.Comment.Name, new { @class = "label label-info" })
+            @Html.TextBoxFor(model => model.Comment.Name, new
+            {
+                @class = "ml-auto mr-auto input_name form-control",
+                @placeholder = "Full Name",
+                @pattern = "([A-Z]{1}[a-z]{2,10})*?\\s([A-Z]{1}[a-z]{2,15})*",
+                @required = "required",
+                @maxlength = "26",
+                @id = "name",
+                @title = "First and last names must start with a capital letter. Example: \"Pavlo Kalenyk\""
+            })
+            @Html.ValidationMessageFor(model => model.Comment.CommentText.Text, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.Comment.CommentText.Text, new { @class = "label label-info" })
+            @Html.TextAreaFor(model => model.Comment.CommentText.Text, new
+            {
+                @class = "mr-auto ml-auto comment form-control",
+                @cols = 50,
+                @rows = 6,
+                @maxlength = 445,
+                @placeholder = "Feedback",
+                @required = "required"
+            })
+            <input class="sub btn btn-success" type="submit" value="Submit Now" />
+        }
+    </div>
+</main>

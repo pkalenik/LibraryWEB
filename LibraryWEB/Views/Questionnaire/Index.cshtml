@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Questionnaire";
+}
+
+@model LibraryWEB.Models.Questionnaire
+
+<main>
+    <div class="f">
+        <div class="quest_container alert-warning">
+            @using (Html.BeginForm("Index", "Questionnaire", FormMethod.Post))
+            {
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                <br />
+                @Html.LabelFor(model => model.FirstName, new { @class = "label label-info" })
+                @Html.TextBoxFor(model => model.FirstName, new
+                {
+                    @class = "firstName form-control",
+                    @placeholder = "First Name",
+                    @maxlength = "15",
+                    @id = "first",
+                    @title = "First name must start with a capital letter. Example: \"Pavlo\""
+                })
+
+                @Html.LabelFor(model => model.LastName, new { @class = "label label-info" })
+                @Html.TextBoxFor(model => model.LastName, new
+                {
+                    @class = "firstName form-control",
+                    @placeholder = "Last Name",
+                    @maxlength = "15",
+                    @id = "last",
+                    @title = "First name must start with a capital letter. Example: \"Kalenyk\""
+                })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                <div>
+                    @Html.Label("", "What genre do you prefer?", new { @class = "label label-info" })<br />
+                    @Html.RadioButton("genre", "Fantastic", true) Fantastic<br />
+                    @Html.RadioButton("genre", "Criminal") Criminal<br />
+                    @Html.RadioButton("genre", "News") News<br />
+                </div>
+                <div>
+                    @Html.Label("", "What languages do you prefer?", new { @class = "label label-info" }) <br />
+                    @Html.RadioButton("language", "English", true) English <br />
+                    @Html.RadioButton("language", "Russian") Russian<br />
+                    @Html.RadioButton("language", "Ukrainian") Ukrainian<br />
+                    @Html.RadioButton("language", "Japaneses") Japaneses<br />
+                    @Html.RadioButton("language", "German") German<br />
+                </div>
+                <div>
+                    @Html.Label("", "Are you over 18 years old?", new { @class = "label label-info" })<br />
+                    @Html.CheckBox("age", true) Yes
+                </div>
+                <input class="btn btn-success" type="submit" value="Submit Now">
+            }
+        </div>
+        <div class="right_sidebar col-lg-3">
+            <ul class="nav">
+                <li><a asp-controller="Home">Home</a></li>
+                <li><a asp-controller="Guest">Guest</a></li>
+                <li><a asp-controller="Questionnaire">Questionnaire</a></li>
+            </ul>
+        </div>
+    </div>
+</main>

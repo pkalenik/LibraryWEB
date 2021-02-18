@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET MVC 5 Application</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+
+    <header class="header alert-info">
+        <div class="container">
+            <div class="header_body">
+                <a asp-controller="Home" class="header_logo">
+                    <img class="logo" src="~/img/librarylogo.png" />
+                </a>
+                <div class="er">
+                    <h2 class="title">
+                        @ViewBag.Title - My MVC 5 Application
+                    </h2>
+                </div>
+
+                <div class="header_burger">
+                    <span></span>
+                </div>
+                <nav class="header_menu">
+                    <ul class="header_list">
+                        <li>
+                            <a asp-controller="Home" class="header_link">Home</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Guest" class="header_link">Guest</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Questionnaire" class="header_link">Questionnaire</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <footer>
+        <p>Developer is Pavlo Kalenyk. My E-mail is kalenik.paul@gmail.com</p>
+        <p class="pe">Pavlo Kalenyk &copy 2020 All Rights Reserved</p>
+        <a class="btn btn-primary" href="#">Go to top!</a>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/js/site.js"></script>
+</body>
+</html>

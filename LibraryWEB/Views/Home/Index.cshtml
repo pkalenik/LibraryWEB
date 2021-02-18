@@ -1,0 +1,62 @@
+﻿@using LibraryWEB.Models
+
+@model IndexViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<main>
+    <div class="row justify-content-between t">
+        <div class="Main_body col col-lg-9">
+            @foreach (var a in Model.Articles)
+            {
+                <div class="news alert alert-success">
+                    <h2 class="news_title h2">
+                        @a.Title
+                    </h2>
+                    <p class="news_date">Date: @a.Date.ToShortDateString()</p>
+                    <p class="news_text">
+                        @a.Text.Substring(0, Math.Min(a.Text.Length, 200))...
+                    </p>
+                    <a asp-action="Article" asp-route-id="@a.Id" class="news_detailed btn btn-primary">Read more</a>
+                    <div>
+                        Tags:
+                        @foreach (var tag in a.Tags)
+                        {
+                            <a asp-action="ShortArticles" asp-route-id="@tag.Id">@tag.Name</a>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="right_sidebar col-lg-3">
+            <ul class="nav">
+                <li><a asp-controller="Home">Home</a></li>
+                <li><a asp-controller="Guest">Guest</a></li>
+                <li><a asp-controller="Questionnaire">Questionnaire</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="navigation_items">
+        @if (Model.PageViewModel.HasPreviousPage)
+        {
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+               class="btn btn-outline-dark">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Back
+            </a>
+        }
+        @if (Model.PageViewModel.HasNextPage)
+        {
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+               class="btn btn-outline-dark">
+                Forward
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a>
+        }
+    </div>
+</main>

@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Your Result";
+}
+
+@model LibraryWEB.Models.Questionnaire
+
+<main class="result alert-info">
+    <div class="result_item">
+        <h2>Your Full Name is: @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h2>
+        <p><b>Your prefer genre is:</b></p>
+        <ul>
+            <li>@ViewBag.answerList[0]</li>
+        </ul>
+        <p><b>Your prefer language is:</b></p>
+        <ul>
+            <li>@ViewBag.answerList[1]</li>
+        </ul>
+        <p><b>Your age large than 18 years:</b></p>
+        <ul>
+            <li>@ViewBag.answerList[2]</li>
+        </ul>
+    </div>
+</main>

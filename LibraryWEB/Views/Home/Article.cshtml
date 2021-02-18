@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Article";
+}
+
+@model LibraryWEB.Models.Article
+
+<main>
+    <div class="traf alert alert-info">
+        <div class="fict">
+            <div class="questionnaire alert alert-success">
+                <h1>@Model.Title</h1>
+                <p class="questionnaire_date">@Model.Date.ToShortDateString()</p>
+                <p class="questionnaire_text">@Model.Text</p>
+                @foreach (var tag in Model.Tags)
+                {
+                    <a asp-action="ShortArticles" asp-route-id="@tag.Id">@tag.Name</a>
+                }
+            </div>
+            <div class="right_sidebar col-lg-3">
+                <ul class="nav">
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Guest" asp-action="Index">Guest</a></li>
+                    <li><a asp-controller="Questionnaire" asp-action="Index">Questionnaire</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+
